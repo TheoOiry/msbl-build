@@ -1,3 +1,5 @@
+import sys
+
 import process
 
 
@@ -16,9 +18,8 @@ def build_to_stats(character, build):
 
 
 def main():
-    payload = input(">")
     try:
-        character, params = payload.split()
+        character, params = sys.argv[1:]
         if '/' in params:
             find_build(character, params)
         else:
