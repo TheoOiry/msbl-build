@@ -28,30 +28,41 @@ def compute_build(base_stats, build):
     return stats
 
 
-def parse_inputs(character, needed_stats):
+def base_stats_from(character):
     base_stats = BASE_STATS.get(character.lower())
     if base_stats is None:
         print(f"{character} is not a valid character")
         return None
+    return base_stats
+
+
+def parse_needed_stats(needed_stats):
     needed_stats = needed_stats.strip().split('/')
     if len(needed_stats) != 5:
         print(BAD_FORMAT_ERROR)
         return None
     try:
-        needed_stats = list(map(int, needed_stats))
+        return list(map(int, needed_stats))
     except ValueError:
         print(BAD_FORMAT_ERROR)
 
-    return base_stats, needed_stats
-
 
 def find_build(character, needed_stats):
-    res = parse_inputs(character, needed_stats)
-    if res is None:
+    base_stats = base_stats_from(character)
+    needed_stats = parse_needed_stats(needed_stats)
+    if base_stats is None or needed_stats is None:
         return None
-    base_stats, needed_stats = res
     for i in range(NUMBER_OF_POSSIBILITIES + 1):
         build = number_to_build(i)
         if compute_build(base_stats, build) == needed_stats:
             return build
     return None
+
+
+def build_to_stats(character, build):
+    base_stats = base_stats_from(character)
+    try:
+        return compute_build(base_stats, list(map(int, str(build))))
+    except IndexError:
+        print(f"{build} is not a valid build")
+        return None
