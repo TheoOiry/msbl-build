@@ -10,3 +10,11 @@ py main.py
 >rosalina 11/8/20/5/19
 5633
 ```
+
+if you want the opposite type the build number instead of the stats
+
+```
+py main.py
+>rosalina 5633
+11/8/20/5/19
+```
