@@ -6,13 +6,13 @@ Juste clone the repo and execute main.py (no dependencies needed)
 ## Example
 
 ```
-py main.py rosalina 11/8/20/5/19
+py build.py rosalina 11/8/20/5/19
 5633
 ```
 
 if you want the opposite type the build number instead of the stats
 
 ```
-py main.py rosalina 5633
+py stats.py rosalina 5633
 11/8/20/5/19
 ```
