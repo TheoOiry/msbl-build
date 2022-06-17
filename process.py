@@ -11,8 +11,6 @@ BAD_FORMAT_ERROR = "Bad format for needed stats please use the format '8/8/8/8/8
 
 
 def number_to_build(n):
-    if n == 0:
-        return [0]
     digits = []
     while n:
         digits.append(int(n % 7))
