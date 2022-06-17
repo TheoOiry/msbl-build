@@ -48,7 +48,7 @@ def parse_inputs(character, needed_stats):
 
 def find_build(character, needed_stats):
     base_stats, needed_stats = parse_inputs(character, needed_stats)
-    for i in range(NUMBER_OF_POSSIBILITIES):
+    for i in range(NUMBER_OF_POSSIBILITIES + 1):
         build = number_to_build(i)
         if compute_build(base_stats, build) == needed_stats:
             return build
