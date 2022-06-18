@@ -85,8 +85,10 @@ def find_builds_by_best_stats(base_stats, stats_index):
     for build in builds():
         build_stats = compute_build(base_stats, build)
         important_stats = [build_stats[i] for i in stats_index]
+        if sorted(important_stats) != important_stats:
+            continue
         other_stats = [v for (i, v) in enumerate(build_stats) if i not in stats_index]
-        if sorted(important_stats) == important_stats and important_stats[-1] >= max(other_stats):
+        if len(other_stats) == 0 or important_stats[-1] >= max(other_stats):
             valid_builds.append((build, sum(important_stats)))
 
     valid_builds.sort(reverse=True, key=lambda v: v[1])
