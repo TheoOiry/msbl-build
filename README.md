@@ -1,18 +1,42 @@
 # MSBL-BUILD
 
 A tool to easily retrieve a build from character stats
-Juste clone the repo and execute main.py (no dependencies needed)
+
+`build` -> find the equipments part for stats
+
+`stats` -> retrieve the stats with equipments parts
+
+`best` -> find the best build with stats type
 
 ## Example
 
+### Build
 ```
 py build.py rosalina 11/8/20/5/19
 5633
 ```
 
-if you want the opposite type the build number instead of the stats
-
+### Stats
 ```
 py stats.py rosalina 5633
 11/8/20/5/19
+```
+
+### Best
+
+Check all possible builds to find the builds with the best
+stats in the defined stats type.
+
+The order is important, in this example it is to find all 
+the builds where the technique is greater than or equal 
+to the shoot and where the shoot is greater than or equal 
+to the highest of all not specified stats.
+
+Then it takes the builds with the highest sum of the specified
+stats. (can return several builds if several builds have the 
+same sum)
+
+```
+py best.py rosalina technic shoot
+(5653): 11/8/18/5/21
 ```
