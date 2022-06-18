@@ -47,13 +47,25 @@ def parse_needed_stats(needed_stats):
         print(BAD_FORMAT_ERROR)
 
 
+def builds():
+    for i in range(NUMBER_OF_POSSIBILITIES + 1):
+        yield number_to_build(i)
+
+
+def build_to_str(build):
+    return ''.join(map(str, build))
+
+
+def stats_to_str(stats):
+    return '/'.join(map(str, stats))
+
+
 def find_build(character, needed_stats):
     base_stats = base_stats_from(character)
     needed_stats = parse_needed_stats(needed_stats)
     if base_stats is None or needed_stats is None:
         return None
-    for i in range(NUMBER_OF_POSSIBILITIES + 1):
-        build = number_to_build(i)
+    for build in builds():
         if compute_build(base_stats, build) == needed_stats:
             return build
     return None
@@ -66,3 +78,37 @@ def build_to_stats(character, build):
     except IndexError:
         print(f"{build} is not a valid build")
         return None
+
+
+def find_builds_by_best_stats(base_stats, stats_index):
+    valid_builds = []
+    for build in builds():
+        build_stats = compute_build(base_stats, build)
+        important_stats = [build_stats[i] for i in stats_index]
+        other_stats = [v for (i, v) in enumerate(build_stats) if i not in stats_index]
+        if sorted(important_stats) == important_stats and important_stats[-1] >= max(other_stats):
+            valid_builds.append((build, sum(important_stats)))
+
+    valid_builds.sort(reverse=True, key=lambda v: v[1])
+    if len(valid_builds) > 0:
+        max_total = max([total for (_, total) in valid_builds])
+        best_builds = []
+        for (build, total) in valid_builds:
+            if total == max_total:
+                best_builds.append(build)
+        return best_builds
+    return []
+
+
+def find_best_builds(character, stats):
+    base_stats = base_stats_from(character)
+    try:
+        stats_index = [STATS_NAMES.index(s) for s in stats][::-1]
+        best_builds = find_builds_by_best_stats(base_stats, stats_index)
+        if len(best_builds) == 0:
+            print("No build found")
+        else:
+            best_builds = [(build, compute_build(base_stats, build)) for build in best_builds]
+            print('\n'.join([f'({build_to_str(build)}): {stats_to_str(stats)}' for build, stats in best_builds]))
+    except ValueError:
+        print(f"Bad stats names need to be in: {', '.join(STATS_NAMES)}")

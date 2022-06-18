@@ -5,7 +5,7 @@ import process
 def build_to_stats(character, build):
     stats = process.build_to_stats(character, build)
     if stats is not None:
-        print('/'.join(map(str, stats)))
+        print(process.stats_to_str(stats))
 
 
 if __name__ == '__main__':

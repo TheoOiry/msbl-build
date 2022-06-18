@@ -5,7 +5,7 @@ import process
 def find_build(character, needed_stats):
     build = process.find_build(character, needed_stats)
     if build is not None:
-        print(''.join(map(str, build)))
+        print(process.build_to_str(build))
     else:
         print("This build is impossible")
 
