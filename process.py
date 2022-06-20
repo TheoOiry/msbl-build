@@ -98,11 +98,10 @@ def find_best_builds(character, stats):
     base_stats = base_stats_from(character)
     try:
         stats_index = [STATS_NAMES.index(s) for s in stats][::-1]
-        best_builds = find_builds_by_best_stats(base_stats, stats_index)
-        if len(best_builds) == 0:
-            print("No build found")
-        else:
-            best_builds = [(build, compute_build(base_stats, build)) for build in best_builds]
-            print('\n'.join([f'({build_to_str(build)}): {stats_to_str(stats)}' for build, stats in best_builds]))
     except ValueError:
         print(f"Bad stats names need to be in: {', '.join(STATS_NAMES)}")
+        return
+    best_builds = find_builds_by_best_stats(base_stats, stats_index)
+    for build in best_builds:
+        build_stats = compute_build(base_stats, build)
+        print(f'({build_to_str(build)}): {stats_to_str(build_stats)}')
