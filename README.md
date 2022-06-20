@@ -28,9 +28,8 @@ Check all possible builds to find the builds with the best
 stats in the defined stats type.
 
 The order is important, in this example it is to find all 
-the builds where the technique is greater than or equal 
-to the shoot and where the shoot is greater than or equal 
-to the highest of all not specified stats.
+the builds where the technic is greater than or equal 
+to the shoot stat.
 
 Then it takes the builds with the highest sum of the specified
 stats. (can return several builds if several builds have the 
