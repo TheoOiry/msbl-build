@@ -91,14 +91,9 @@ def find_builds_by_best_stats(base_stats, stats_index):
         if len(other_stats) == 0 or important_stats[-1] >= max(other_stats):
             valid_builds.append((build, sum(important_stats)))
 
-    valid_builds.sort(reverse=True, key=lambda v: v[1])
     if len(valid_builds) > 0:
         max_total = max([total for (_, total) in valid_builds])
-        best_builds = []
-        for (build, total) in valid_builds:
-            if total == max_total:
-                best_builds.append(build)
-        return best_builds
+        return [b for (b, total) in valid_builds if total == max_total]
     return []
 
 
