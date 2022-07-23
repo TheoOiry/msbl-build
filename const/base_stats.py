@@ -8,7 +8,9 @@ BASE_STATS = {
     "yoshi": [10, 10, 17, 17, 9],
     "dk": [16, 9, 13, 16, 9],
     "wario": [17, 9, 15, 13, 9],
-    "waluigi": [15, 16, 9, 9, 14]
+    "waluigi": [15, 16, 9, 9, 14],
+    "maskass": [13, 12, 13, 13, 12],
+    "daisy": [13, 9, 10, 13, 18]
 }
 
 STATS_NAMES = ["strength", "speed", "shoot", "pass", "technic"]
